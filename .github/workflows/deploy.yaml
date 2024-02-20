@@ -12,7 +12,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: build-publish
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+
+    - name: Install dependencies
+      run: npm install # or yarn install, depending on your project
+
+    - name: Build and Publish
+      id: build-publish
       uses: bitovi/github-actions-react-to-github-pages@v1.2.2
       with:
         path: build # change to your build folder
